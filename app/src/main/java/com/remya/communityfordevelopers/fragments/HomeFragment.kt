@@ -1,33 +1,32 @@
 package com.remya.communityfordevelopers.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
+import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DiffUtil
+import com.remya.communityfordevelopers.CardStackAdapter
+import com.remya.communityfordevelopers.ItemModel
 import com.remya.communityfordevelopers.R
+import com.remya.communityfordevelopers.callbacks.CardStackCallback
+import com.remya.communityfordevelopers.databinding.FragmentHomeBinding
+import com.yuyakaido.android.cardstackview.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val TAG = "DashboardActivity"
+    private var manager: CardStackLayoutManager? = null
+    private var adapter: CardStackAdapter? = null
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +34,95 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(LayoutInflater.from(requireContext()))
+//        return inflater.inflate(R.layout.fragment_home, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val cardStackView = binding.cardStackView
+        manager = CardStackLayoutManager(requireContext(), object : CardStackListener {
+            override fun onCardDragging(direction: Direction, ratio: Float) {
+                Log.d(TAG, "onCardDragging: d=" + direction.name.toString() + " ratio=" + ratio)
+            }
+
+            override fun onCardSwiped(direction: Direction) {
+                Log.d(TAG, "onCardSwiped: p=" + manager?.topPosition + " d=" + direction)
+                if (direction === Direction.Right) {
+                    Toast.makeText(requireContext(), "Direction Right", Toast.LENGTH_SHORT).show()
+                }
+                if (direction === Direction.Top) {
+                    Toast.makeText(requireContext(), "Direction Top", Toast.LENGTH_SHORT).show()
+                }
+                if (direction === Direction.Left) {
+                    Toast.makeText(requireContext(), "Direction Left", Toast.LENGTH_SHORT).show()
+                }
+                if (direction === Direction.Bottom) {
+                    Toast.makeText(requireContext(), "Direction Bottom", Toast.LENGTH_SHORT).show()
+                }
+
+                // Paginating
+                if (manager?.topPosition == adapter!!.itemCount - 5) {
+                    paginate()
                 }
             }
+
+            override fun onCardRewound() {
+                Log.d(TAG, "onCardRewound: " + manager!!.topPosition)
+            }
+
+            override fun onCardCanceled() {
+                Log.d(TAG, "onCardRewound: " + manager!!.topPosition)
+            }
+
+            override fun onCardAppeared(view: View, position: Int) {
+                val tv: TextView = view.findViewById(R.id.item_name)
+                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.text)
+            }
+
+            override fun onCardDisappeared(view: View, position: Int) {
+                val tv: TextView = view.findViewById(R.id.item_name)
+                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.text)
+            }
+        })
+        manager?.setStackFrom(StackFrom.None)
+        manager?.setVisibleCount(3)
+        manager?.setTranslationInterval(8.0f)
+        manager?.setScaleInterval(0.95f)
+        manager?.setSwipeThreshold(0.3f)
+        manager?.setMaxDegree(20.0f)
+        manager?.setDirections(Direction.FREEDOM)
+        manager?.setCanScrollHorizontal(true)
+        manager?.setSwipeableMethod(SwipeableMethod.Manual)
+        manager?.setOverlayInterpolator(LinearInterpolator())
+        adapter = CardStackAdapter(addList()!!)
+        cardStackView.layoutManager = manager
+        cardStackView.adapter = adapter
+        cardStackView.itemAnimator = DefaultItemAnimator()
+    }
+
+    private fun paginate() {
+        val old = adapter!!.getItems()
+        val baru: List<ItemModel> = ArrayList(addList())
+        val callback = CardStackCallback(old, baru)
+        val hasil = DiffUtil.calculateDiff(callback)
+        adapter!!.setItems(baru)
+        hasil.dispatchUpdatesTo(adapter!!)
+    }
+
+    private fun addList(): List<ItemModel>? {
+        val items: MutableList<ItemModel> = ArrayList()
+        items.add(ItemModel(R.drawable.app_icon, "Markonah", "24", "Jember"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Marpuah", "20", "Malang"))
+        items.add(ItemModel(R.drawable.app_icon, "Sukijah", "27", "Jonggol"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Markobar", "19", "Bandung"))
+        items.add(ItemModel(R.drawable.app_icon, "Marmut", "25", "Hutan"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Markonah", "24", "Jember"))
+        items.add(ItemModel(R.drawable.app_icon, "Marpuah", "20", "Malang"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sukijah", "27", "Jonggol"))
+        items.add(ItemModel(R.drawable.app_icon, "Markobar", "19", "Bandung"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Marmut", "25", "Hutan"))
+        return items
     }
 }
