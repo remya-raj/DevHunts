@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-30/data/res/layout/activity_list_item.xml" value="0.34739583333333335" />
+        <entry key="app/src/main/res/drawable/gradation_black.xml" value="0.36354166666666665" />
+        <entry key="app/src/main/res/drawable/ic_arrow_back_black_24dp.xml" value="0.36354166666666665" />
+        <entry key="app/src/main/res/drawable/ic_arrow_downward_black_24dp.xml" value="0.36354166666666665" />
+        <entry key="app/src/main/res/drawable/ic_arrow_forward_black_24dp.xml" value="0.36354166666666665" />
+        <entry key="app/src/main/res/drawable/ic_arrow_upward_black_24dp.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_insert_emoticon_24.xml" value="0.2552083333333333" />
+        <entry key="app/src/main/res/drawable/overlay_black.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.225" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.225" />
+        <entry key="app/src/main/res/layout/item_card.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.2390625" />
       </map>
     </option>
