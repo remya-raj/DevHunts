@@ -1,10 +1,11 @@
-package com.remya.communityfordevelopers
+package com.remya.communityfordevelopers.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.content.Intent
 import android.os.Handler
+import com.remya.communityfordevelopers.R
 
 
 class MainActivity : AppCompatActivity() {

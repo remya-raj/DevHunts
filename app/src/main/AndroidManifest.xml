@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CommunityForDevelopers">
         <activity
-            android:name=".DashboardActivity"
+            android:name=".activities.DashboardActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

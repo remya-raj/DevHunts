@@ -1,4 +1,4 @@
-package com.remya.communityfordevelopers
+package com.remya.communityfordevelopers.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +15,10 @@ import android.view.animation.LinearInterpolator
 import android.widget.TextView
 
 import android.widget.Toast
+import com.remya.communityfordevelopers.CardStackAdapter
+import com.remya.communityfordevelopers.callbacks.CardStackCallback
+import com.remya.communityfordevelopers.ItemModel
+import com.remya.communityfordevelopers.R
 import com.remya.communityfordevelopers.databinding.ActivityDashboardBinding
 import com.yuyakaido.android.cardstackview.*
 
