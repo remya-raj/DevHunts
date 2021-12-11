@@ -33,9 +33,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(LayoutInflater.from(requireContext()))
-//        return inflater.inflate(R.layout.fragment_home, container, false)
         return binding.root
     }
 
@@ -113,16 +111,38 @@ class HomeFragment : Fragment() {
 
     private fun addList(): List<ItemModel>? {
         val items: MutableList<ItemModel> = ArrayList()
-        items.add(ItemModel(R.drawable.app_icon, "Markonah", "24", "Jember"))
-        items.add(ItemModel(R.drawable.coding_dribbble, "Marpuah", "20", "Malang"))
-        items.add(ItemModel(R.drawable.app_icon, "Sukijah", "27", "Jonggol"))
-        items.add(ItemModel(R.drawable.coding_dribbble, "Markobar", "19", "Bandung"))
-        items.add(ItemModel(R.drawable.app_icon, "Marmut", "25", "Hutan"))
-        items.add(ItemModel(R.drawable.coding_dribbble, "Markonah", "24", "Jember"))
-        items.add(ItemModel(R.drawable.app_icon, "Marpuah", "20", "Malang"))
-        items.add(ItemModel(R.drawable.coding_dribbble, "Sukijah", "27", "Jonggol"))
-        items.add(ItemModel(R.drawable.app_icon, "Markobar", "19", "Bandung"))
-        items.add(ItemModel(R.drawable.coding_dribbble, "Marmut", "25", "Hutan"))
+        items.add(ItemModel(R.drawable.app_icon, "Remya Raj", "21", "Android Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "19", "React Native"))
+        items.add(ItemModel(R.drawable.app_icon, "Ohid Behna", "21", "IOS Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandita Saha", "21", "Web Developer"))
+        items.add(ItemModel(R.drawable.app_icon, "Bonuuuu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.app_icon, "Sriparna", "20", "Backend Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "21", "Backend Develper"))
+        items.add(ItemModel(R.drawable.app_icon, "Remya Raj", "21", "Android Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "19", "React Native"))
+        items.add(ItemModel(R.drawable.app_icon, "Ohid Behna", "21", "IOS Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandita Saha", "21", "Web Developer"))
+        items.add(ItemModel(R.drawable.app_icon, "Bonuuuu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.app_icon, "Sriparna", "20", "Backend Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "21", "Backend Develper"))
+        items.add(ItemModel(R.drawable.app_icon, "Remya Raj", "21", "Android Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "19", "React Native"))
+        items.add(ItemModel(R.drawable.app_icon, "Ohid Behna", "21", "IOS Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandita Saha", "21", "Web Developer"))
+        items.add(ItemModel(R.drawable.app_icon, "Bonuuuu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.app_icon, "Sriparna", "20", "Backend Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "21", "Backend Develper"))
+        items.add(ItemModel(R.drawable.app_icon, "Remya Raj", "21", "Android Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "19", "React Native"))
+        items.add(ItemModel(R.drawable.app_icon, "Ohid Behna", "21", "IOS Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandita Saha", "21", "Web Developer"))
+        items.add(ItemModel(R.drawable.app_icon, "Bonuuuu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Nandu", "21", "UI/UX Designer"))
+        items.add(ItemModel(R.drawable.app_icon, "Sriparna", "20", "Backend Developer"))
+        items.add(ItemModel(R.drawable.coding_dribbble, "Sumit Keshari", "21", "Backend Develper"))
         return items
     }
 }
