@@ -17,6 +17,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initView() {
         findViewById<Button>(R.id.btnLogin).setOnClickListener {
+            val sharedPreferences = getSharedPreferences("user", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(MainActivity.IS_USER_LOGGED_IN, true)
+            editor.apply()
+
             startActivity(Intent(this, DashboardActivity::class.java))
         }
     }
