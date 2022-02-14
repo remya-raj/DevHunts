@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "761354773416",
+    "project_id": "dev-hunts",
+    "storage_bucket": "dev-hunts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761354773416:android:2611f35cdb47d9081af39d",
+        "android_client_info": {
+          "package_name": "com.remya.communityfordevelopers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761354773416-7lsidigcjmejh29aklt89lrg6rhdqebm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.remya.communityfordevelopers",
+            "certificate_hash": "d34579738cbd24e1d9439f14835b43ed4507dc7d"
+          }
+        },
+        {
+          "client_id": "761354773416-mc1deg0a786cslsjkhv01cn6hvudhrmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGnfQ0vvUE-WEx-P1ktk0PbYybMELNSL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761354773416-mc1deg0a786cslsjkhv01cn6hvudhrmg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

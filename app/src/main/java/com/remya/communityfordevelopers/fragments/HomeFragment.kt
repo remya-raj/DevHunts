@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import com.remya.communityfordevelopers.CardStackAdapter
-import com.remya.communityfordevelopers.ItemModel
+import com.remya.communityfordevelopers.models.ItemModel
 import com.remya.communityfordevelopers.R
 import com.remya.communityfordevelopers.callbacks.CardStackCallback
 import com.remya.communityfordevelopers.databinding.FragmentHomeBinding

@@ -5,9 +5,10 @@ import android.os.Bundle
 
 import android.content.Intent
 import android.os.Handler
+import com.google.firebase.auth.FirebaseAuth
 import com.remya.communityfordevelopers.ApiController
 import com.remya.communityfordevelopers.R
-import com.remya.communityfordevelopers.Skills
+import com.remya.communityfordevelopers.models.Skills
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,71 +16,25 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    var list: ArrayList<Skills>? = null
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-
-        val call: Call<ArrayList<Skills>>? = ApiController.getInstance()
-            ?.getApi()
-            ?.getAllSkills()
-
-        call?.enqueue(object : Callback<ArrayList<Skills>> {
-            override fun onFailure(call: Call<ArrayList<Skills>>, t: Throwable) {
-                val error = t
-            }
-
-            override fun onResponse(call: Call<ArrayList<Skills>>, response: Response<ArrayList<Skills>>) {
-                list = response.body()
-            }
-
-        })
+        initData()
 
         Handler().postDelayed({
-            val sharedPreferences = getSharedPreferences("user", MODE_PRIVATE)
-
-            if (sharedPreferences.contains(IS_USER_LOGGED_IN)) { // login data available
-
-                if(sharedPreferences.getBoolean(IS_USER_LOGGED_IN, false)) { // user logged in
-
-                    val intent = Intent(this, DashboardActivity::class.java)
-                    this.startActivity(intent)
-                    this.finish()
-
-                } else { // user not logged in
-
-                    if (sharedPreferences.contains(IS_USER_REGISTERED)) { // sign up data available
-                        if (sharedPreferences.getBoolean(IS_USER_REGISTERED, false)) { // user registered
-
-                            val intent = Intent(this, LoginActivity::class.java)
-                            this.startActivity(intent)
-                            this.finish()
-
-                        } else { // user not registered
-                            val intent = Intent(this, SignUpActivity::class.java)
-                            this.startActivity(intent)
-                            this.finish()
-                        }
-
-                    } else { // sign up data unavailable
-                        val intent = Intent(this, SignUpActivity::class.java)
-                        this.startActivity(intent)
-                        this.finish()
-                    }
-
-                }
-            } else { // login data unavailable
-                val intent = Intent(this, SignUpActivity::class.java)
-                this.startActivity(intent)
-                this.finish()
+            val user = auth.currentUser
+            if (user == null) {
+                startActivity(Intent(this, LoginActivity::class.java))
+            } else {
+                startActivity(Intent(this, DashboardActivity::class.java))
             }
         }, 3000)
     }
 
-    companion object {
-        const val IS_USER_LOGGED_IN = "is_user_logged_in"
-        const val IS_USER_REGISTERED = "is_user_registered"
+    private fun initData() {
+        auth = FirebaseAuth.getInstance()
     }
 }

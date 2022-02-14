@@ -1,7 +1,7 @@
 package com.remya.communityfordevelopers.callbacks
 
 import androidx.recyclerview.widget.DiffUtil
-import com.remya.communityfordevelopers.ItemModel
+import com.remya.communityfordevelopers.models.ItemModel
 
 
 class CardStackCallback(private val old: List<ItemModel>, private val baru: List<ItemModel>) :

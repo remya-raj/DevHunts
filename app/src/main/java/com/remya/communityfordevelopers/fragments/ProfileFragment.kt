@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.remya.communityfordevelopers.R
 import com.remya.communityfordevelopers.activities.LoginActivity
 import com.remya.communityfordevelopers.activities.MainActivity
@@ -37,10 +39,7 @@ class ProfileFragment : Fragment() {
 
     private fun initView() {
         binding.btnLogOut.setOnClickListener {
-            val sharedPreferences = requireActivity().getSharedPreferences("user", AppCompatActivity.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putBoolean(MainActivity.IS_USER_LOGGED_IN, false)
-            editor.apply()
+            Firebase.auth.signOut()
 
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             startActivity(intent)

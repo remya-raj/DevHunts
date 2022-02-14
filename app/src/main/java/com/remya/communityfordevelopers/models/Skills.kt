@@ -1,4 +1,4 @@
-package com.remya.communityfordevelopers
+package com.remya.communityfordevelopers.models
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package com.remya.communityfordevelopers
+package com.remya.communityfordevelopers.models
 
 class ItemModel {
     var image = 0

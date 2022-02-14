@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.remya.communityfordevelopers.databinding.ItemCardBinding
+import com.remya.communityfordevelopers.models.ItemModel
 
 
 class CardStackAdapter(items: List<ItemModel>) :
