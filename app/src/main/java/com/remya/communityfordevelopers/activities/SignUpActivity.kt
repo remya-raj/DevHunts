@@ -30,7 +30,7 @@ class SignUpActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         val user = auth.currentUser
-                        startActivity(Intent(this, DashboardActivity::class.java))
+                        startActivity(Intent(this, RegisterUserActivity::class.java))
                         finish()
                     } else {
                         // If sign in fails, display a message to the user.

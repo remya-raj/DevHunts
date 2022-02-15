@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CommunityForDevelopers"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.RegisterUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignUpActivity"
             android:exported="true" />
         <activity
