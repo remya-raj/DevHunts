@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireActivity(), "Successful", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(requireActivity(), "Successful", Toast.LENGTH_LONG).show()
                     for (document in task.result) {
                         Log.d(TAG, document.id + " => " + document.data)
 
