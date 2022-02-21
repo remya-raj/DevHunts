@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 
                         items.add(
                             ItemModel(
-                                R.drawable.app_icon,
+                                document.get("Image").toString(),
                                 document.get("Name").toString(),
                                 document.get("Age").toString(),
                                 document.get("Skill").toString()
