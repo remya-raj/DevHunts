@@ -7,14 +7,19 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.remya.communityfordevelopers.databinding.ActivityRegisterUserBinding
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class RegisterUserActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityRegisterUserBinding
     lateinit var db: FirebaseFirestore
+    lateinit var uri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,30 +41,7 @@ class RegisterUserActivity : AppCompatActivity() {
         }
 
         binding.btnGetStarted.setOnClickListener {
-            val user: MutableMap<String, Any> = HashMap()
-            user["Name"] = binding.etName.text.toString()
-            user["Age"] = binding.etAge.text.toString()
-            user["Skill"] = binding.etSkill.text.toString()
-
-            db.collection("user")
-                .add(user)
-                .addOnSuccessListener {
-                    Toast.makeText(
-                        this,
-                        "Successful",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    startActivity(Intent(this, DashboardActivity::class.java))
-                    finish()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(
-                        this,
-                        "Failed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+            uploadtofirebase()
         }
     }
 
@@ -67,11 +49,47 @@ class RegisterUserActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
     }
 
+    private fun uploadtofirebase() {
+        val storage = FirebaseStorage.getInstance()
+        val uploader = storage.getReference("Image1" + Random().nextInt(50))
+        uploader.putFile(uri)
+            .addOnSuccessListener(OnSuccessListener<Any?> {
+                uploader.downloadUrl.addOnSuccessListener(OnSuccessListener<Uri> { uri ->
+                    val user: MutableMap<String, Any> = HashMap()
+                    user["Name"] = binding.etName.text.toString()
+                    user["Age"] = binding.etAge.text.toString()
+                    user["Skill"] = binding.etSkill.text.toString()
+                    user["Image"] = uri.toString()
+
+                    db.collection("user")
+                        .add(user)
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                this,
+                                "Successful",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            startActivity(Intent(this, DashboardActivity::class.java))
+                            finish()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(
+                                this,
+                                "Failed",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    Toast.makeText(applicationContext, "Uploaded", Toast.LENGTH_LONG).show()
+                })
+            })
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             //Image Uri will not be null for RESULT_OK
-            val uri: Uri = data?.data!!
+            uri = data?.data!!
 
             // Use Uri object instead of File to avoid storage permissions
             binding.ivProfilePic.setImageURI(uri)
