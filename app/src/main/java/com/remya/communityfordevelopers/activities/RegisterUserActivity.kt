@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.remya.communityfordevelopers.databinding.ActivityRegisterUserBinding
@@ -19,6 +20,7 @@ class RegisterUserActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityRegisterUserBinding
     lateinit var db: FirebaseFirestore
+    lateinit var auth: FirebaseAuth
     lateinit var uri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,7 @@ class RegisterUserActivity : AppCompatActivity() {
     }
 
     private fun initData() {
+        auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
     }
 
@@ -61,25 +64,27 @@ class RegisterUserActivity : AppCompatActivity() {
                     user["Skill"] = binding.etSkill.text.toString()
                     user["Image"] = uri.toString()
 
-                    db.collection("user")
-                        .add(user)
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                this,
-                                "Successful",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                    auth.currentUser?.let { it1 ->
+                        db.collection("user").document(it1.uid).set(user)
+                //                        .add(user)
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    this,
+                                    "Successful",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                            startActivity(Intent(this, DashboardActivity::class.java))
-                            finish()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(
-                                this,
-                                "Failed",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                                startActivity(Intent(this, DashboardActivity::class.java))
+                                finish()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(
+                                    this,
+                                    "Failed",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                    }
                     Toast.makeText(applicationContext, "Uploaded", Toast.LENGTH_LONG).show()
                 })
             })

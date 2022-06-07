@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.remya.communityfordevelopers.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
+    lateinit var db: FirebaseFirestore
     private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,9 @@ class SignUpActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         val user = auth.currentUser
+                        if (user != null) {
+                            db.collection("user").document(user.uid)
+                        }
                         startActivity(Intent(this, RegisterUserActivity::class.java))
                         finish()
                     } else {
@@ -43,5 +48,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun initData() {
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
     }
 }
