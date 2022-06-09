@@ -68,7 +68,9 @@ class ProfileFragment : Fragment() {
                                 .centerCrop()
                                 .into(binding.ivProfilePic)
 
-                            binding.etName.text = document.get("Name").toString()
+                            val username = document.get("Name").toString()
+                            binding.tvHelloUser.text = "Hello\n" + username+"!"
+                            binding.etName.text = username
                             binding.etAge.text = document.get("Age").toString()
                             binding.etSkill.text = document.get("Skill").toString()
                         }

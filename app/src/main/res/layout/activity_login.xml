@@ -12,7 +12,7 @@
         android:id="@+id/tvWelcomeBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Back!"
+        android:text="Welcome to DevHunts!"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="27dp"

@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         Handler().postDelayed({
             val user = auth.currentUser
             if (user == null) {
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this, OnboardingActivity::class.java))
             } else {
                 startActivity(Intent(this, DashboardActivity::class.java))
             }
-        }, 3000)
+        }, 5000)
     }
 
     private fun initData() {
