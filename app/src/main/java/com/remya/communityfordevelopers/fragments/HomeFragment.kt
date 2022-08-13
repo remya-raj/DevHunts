@@ -1,5 +1,6 @@
 package com.remya.communityfordevelopers.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,9 +12,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.remya.communityfordevelopers.CardStackAdapter
 import com.remya.communityfordevelopers.R
+import com.remya.communityfordevelopers.activities.DashboardActivity
 import com.remya.communityfordevelopers.callbacks.CardStackCallback
 import com.remya.communityfordevelopers.databinding.FragmentHomeBinding
 import com.remya.communityfordevelopers.models.ItemModel
@@ -25,6 +29,7 @@ class HomeFragment : Fragment() {
     private var adapter: CardStackAdapter? = null
     private lateinit var binding: FragmentHomeBinding
     lateinit var db: FirebaseFirestore
+    lateinit var auth: FirebaseAuth
     val items: MutableList<ItemModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,23 +38,25 @@ class HomeFragment : Fragment() {
     }
 
     private fun initData() {
+        auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
         db.collection("user")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireActivity(), "Successful", Toast.LENGTH_LONG).show()
                     for (document in task.result) {
                         Log.d(TAG, document.id + " => " + document.data)
 
-                        items.add(
-                            ItemModel(
-                                R.drawable.app_icon,
-                                document.get("Name").toString(),
-                                document.get("Age").toString(),
-                                document.get("Skill").toString()
+                        if (document.id != auth.currentUser?.uid ?: true)
+                            items.add(
+                                ItemModel(
+                                    document.get("Image").toString(),
+                                    document.get("Name").toString(),
+                                    document.get("Age").toString(),
+                                    document.get("Skill").toString(),
+                                    document.id
+                                )
                             )
-                        )
                     }
 
                     val cardStackView = binding.cardStackView
@@ -69,28 +76,28 @@ class HomeFragment : Fragment() {
                             if (direction === Direction.Right) {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Direction Right",
+                                    "Interested",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                             if (direction === Direction.Top) {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Direction Top",
+                                    "Super Swipe",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                             if (direction === Direction.Left) {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Direction Left",
+                                    "Not Interested",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                             if (direction === Direction.Bottom) {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Direction Bottom",
+                                    "Not Interested",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

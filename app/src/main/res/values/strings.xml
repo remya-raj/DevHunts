@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">CommunityForDevelopers</string>
+    <string name="app_name">DevHunts</string>
+    <string name="find_your_match">Find the {CSS} to your &lt;/HTML&gt;</string>
 </resources>

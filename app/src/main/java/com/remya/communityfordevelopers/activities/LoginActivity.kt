@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        val user = auth.currentUser
                         startActivity(Intent(this, DashboardActivity::class.java))
                         finish()
                     } else {
@@ -44,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
         }
     }
 

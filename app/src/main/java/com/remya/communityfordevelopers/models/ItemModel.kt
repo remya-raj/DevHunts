@@ -1,7 +1,7 @@
 package com.remya.communityfordevelopers.models
 
 class ItemModel {
-    var image = 0
+    var image: String? = null
         private set
     var nama: String? = null
         private set
@@ -9,12 +9,15 @@ class ItemModel {
         private set
     var kota: String? = null
         private set
+    var docId: String? = null
+        private set
 
     constructor() {}
-    constructor(image: Int, nama: String?, usia: String?, kota: String?) {
+    constructor(image: String, nama: String?, usia: String?, kota: String?, docId: String?) {
         this.image = image
         this.nama = nama
         this.usia = usia
         this.kota = kota
+        this.docId = docId
     }
 }
