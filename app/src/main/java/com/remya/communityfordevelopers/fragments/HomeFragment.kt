@@ -76,7 +76,7 @@ class HomeFragment : Fragment() {
                             if (direction === Direction.Right) {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Say Hi",
+                                    "Interested",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
