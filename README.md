@@ -1,4 +1,4 @@
-Dev Hunts
+<h1>DevHunts</h1>
 
 <img src="https://user-images.githubusercontent.com/52780790/222095958-6989d0d2-2534-41e1-a2ae-e9f110cc960f.png"  width="550" height="400">
 <img src="https://user-images.githubusercontent.com/52780790/222095929-86c74282-7806-49e0-bbfc-c6eebbba02ee.png"  width="700" height="400">
